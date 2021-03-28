@@ -1,0 +1,72 @@
+﻿/* Style for index.html  */
+
+[data-theme="dark"] {
+	--bg-color: rgba(60, 60, 60, 1);
+	--txt-color: #FFFFFF;
+	--bt-border-color: rgba(150, 150, 150, 1);
+	--bt-bg-color: rgba(100, 100, 100, 1);
+	--bt-hover-border-color: rgba(200, 200, 200, 1);
+	--sym-hover-bg-color:  rgba(100, 140, 140, 1);
+	--switch-hover-bg-color:  rgba(100, 140, 100, 1);
+}
+[data-theme="light"] {
+	--bg-color: #FFFFFF;
+	--txt-color: #000000;
+	--bt-border-color: rgba(0, 0, 0, 1);
+	--bt-bg-color: #FFFFFF;
+	--bt-hover-border-color: rgba(100, 100, 100, 1);
+	--sym-hover-bg-color: rgba(200, 240, 240, 1);
+	--switch-hover-bg-color: rgba(200, 240, 200, 1);
+}
+
+body {
+	background-color: var(--bg-color);
+}
+/*     Title on top  */
+h1 {
+	text-align: center;
+	color: var(--txt-color);
+	font-size: 7vmin;
+}
+/* 	info   */
+h2 {
+	text-align: center;
+	color: var(--txt-color);
+	font-size: 5vmin;
+}
+/* 	container for the letters */
+.sym-pnl {
+	display: grid;
+	grid-template-columns: 13vmin 13vmin 13vmin 13vmin 13vmin 13vmin 13vmin;
+}
+/* 	make the toggle case button occupy two columns and place it in the grid*/
+.tall {
+	grid-row: 2 / 3;
+	grid-row-end: span 2;
+}
+/* 	the symbols and the toggle buttons */
+.sym-bt,.switch-bt {
+	background-color: var(--bt-bg-color);
+	border: 2px solid var(--bt-border-color);
+	color: var(--txt-color);
+	align: center;
+}
+.sym-bt:hover {
+	background-color: var(--sym-hover-bg-color);
+	border: 2px solid var(--bt-hover-border-color);
+}
+.sym-bt {
+	padding: 2vmin;
+	font-size: 8vmin;
+	text-align: center;
+}
+.switch-bt:hover {
+	background-color: var(--switch-hover-bg-color);
+	border: 2px solid var(--bt-hover-border-color);
+}
+.switch-bt {
+	padding: 1vmin;
+	margin:0px;
+	font-size: 8vmin;
+	text-align: center;
+}
