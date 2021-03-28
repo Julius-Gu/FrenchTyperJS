@@ -1,0 +1,170 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title>FrenchTyper</title>
+<style>
+	[data-theme="dark"] {
+		--bg-color: rgba(60, 60, 60, 1);
+		--txt-color: #FFFFFF;
+		--bt-border-color: rgba(150, 150, 150, 1);
+		--bt-bg-color: rgba(100, 100, 100, 1);
+		--bt-hover-border-color: rgba(200, 200, 200, 1);
+		--sym-hover-bg-color:  rgba(100, 140, 140, 1);
+		--switch-hover-bg-color:  rgba(100, 140, 100, 1);
+	}
+	[data-theme="light"] {
+		--bg-color: #FFFFFF;
+		--txt-color: #000000;
+		--bt-border-color: rgba(0, 0, 0, 1);
+		--bt-bg-color: #FFFFFF;
+		--bt-hover-border-color: rgba(100, 100, 100, 1);
+		--sym-hover-bg-color: rgba(200, 240, 240, 1);
+		--switch-hover-bg-color: rgba(200, 240, 200, 1);
+	}
+	
+	body {
+		background-color: var(--bg-color);
+	}
+    /*     Title on top  */
+	h1 {
+		text-align: center;
+		color: var(--txt-color);
+		font-size: 7vmin;
+	}
+    /* 	info   */
+	h2 {
+		text-align: center;
+		color: var(--txt-color);
+		font-size: 5vmin;
+	}
+/* 	container for the letters */
+	.sym-pnl {
+		display: grid;
+		grid-template-columns: 13vmin 13vmin 13vmin 13vmin 13vmin 13vmin 13vmin;
+	}
+/* 	make the toggle case button occupy two columns and place it in the grid*/
+	.tall {
+		grid-row: 2 / 3;
+		grid-row-end: span 2;
+	}
+/* 	the symbols and the toggle buttons */
+	.sym-bt,.switch-bt {
+		background-color: var(--bt-bg-color);
+		border: 2px solid var(--bt-border-color);
+		color: var(--txt-color);
+		align: center;
+	}
+	.sym-bt:hover {
+		background-color: var(--sym-hover-bg-color);
+		border: 2px solid var(--bt-hover-border-color);
+	}
+	.sym-bt {
+		padding: 2vmin;
+		font-size: 8vmin;
+		text-align: center;
+	}
+	.switch-bt:hover {
+		background-color: var(--switch-hover-bg-color);
+		border: 2px solid var(--bt-hover-border-color);
+	}
+	.switch-bt {
+		padding: 1vmin;
+		margin:0px;
+		font-size: 8vmin;
+		text-align: center;
+	}
+</style>
+</head>
+<body>
+	<!-- Input field from which the text will be copied -->
+	<!-- can't be hidden since some browser will think that it might be malicius then -->
+	<input type="text" value="i am shy, so please ignore me" id="csymbol" style="font-size:1px;padding:1px;background-color: var(--bg-color);border:0px"></input>
+	
+	
+	<!-- Header -->
+	<h1>FrenchTyper by Julius Guthunz
+	<!-- A button to switch between light and dark theme-->
+	<button class="switch-bt" type="button" onclick="switch_theme()">theme</button>
+	</h1>
+	
+	<!-- Info Header -->
+	<h2 id="info">click on a letter to copy</h2>
+	
+<!-- 	container for the buttons -->
+	<div style="display:flex;justify-content:center;">
+	<div class="sym-pnl">
+<!-- 		toggle case -->
+		<input type="button" class="switch-bt tall" onclick="toggle_case()" value="^"></input>
+		
+		<input class="sym-bt" type="button" onclick="copy(this)" value="ù"></input>
+		<input class="sym-bt" type="button" onclick="copy(this)" value="ú"></input>
+		<input class="sym-bt" type="button" onclick="copy(this)" value="û"></input>
+		
+		<input class="sym-bt" type="button" onclick="copy(this)" value="à"></input>
+		<input class="sym-bt" type="button" onclick="copy(this)" value="á"></input>
+		<input class="sym-bt" type="button" onclick="copy(this)" value="â"></input>
+		<input class="sym-bt" type="button" onclick="copy(this)" value="æ"></input>
+
+		<input class="sym-bt" type="button" onclick="copy(this)" value="è"></input>
+		<input class="sym-bt" type="button" onclick="copy(this)" value="é"></input>
+		<input class="sym-bt" type="button" onclick="copy(this)" value="ê"></input>
+		<input class="sym-bt" type="button" onclick="copy(this)" value="ë"></input>
+		
+		
+		<input class="sym-bt" type="button" onclick="copy(this)" value="ô"></input>
+		<input class="sym-bt" type="button" onclick="copy(this)" value="œ"></input>
+		
+		<input class="sym-bt" type="button" onclick="copy(this)" value="î"></input>
+		<input class="sym-bt" type="button" onclick="copy(this)" value="ï"></input>
+		
+		<input class="sym-bt" type="button" onclick="copy(this)" value="ÿ"></input>
+		
+		<input class="sym-bt" type="button" onclick="copy(this)" value="ç"></input>
+		
+		<input class="sym-bt" type="button" onclick="copy(this)" value="«"></input>
+		<input class="sym-bt" type="button" onclick="copy(this)" value="»"></input>
+	</div>
+	</div>
+
+<script>
+	var is_light_theme = false;
+	var is_upper_case = false;
+	
+	document.documentElement.setAttribute('data-theme', 'dark');
+	
+	function switch_theme() {
+		if(is_light_theme) {
+			document.documentElement.setAttribute('data-theme', 'dark');
+		} else {
+			document.documentElement.setAttribute('data-theme', 'light');
+		}
+		is_light_theme = !is_light_theme;
+	}
+	
+// 	copies the value of an html element
+	function copy(element) {
+		var copyText = document.getElementById("csymbol");
+		copyText.value = element.value;
+		copyText.select();
+		copyText.setSelectionRange(0, 99999)
+		document.execCommand("copy");
+		document.getElementById("info").innerHTML = " "+copyText.value+" copied!";
+	}
+	
+	function toggle_case() {
+		var bts = document.getElementsByClassName("sym-bt");
+		for(i=0;i<bts.length;i++) {
+			if(is_upper_case) {
+				var txt=bts[i].value.toLowerCase();
+			} else {
+				var txt=bts[i].value.toUpperCase();
+			}
+			bts[i].value=txt;
+		}
+		is_upper_case = !is_upper_case;
+	}
+	
+</script>
+
+</body>
+</html>
